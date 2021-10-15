@@ -1,9 +1,11 @@
 package com.example.tugaskaspin
 
+import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tugaskaspin.room.Barang
 import com.example.tugaskaspin.room.BarangDB
@@ -60,10 +62,7 @@ class BarangActivity : AppCompatActivity() {
             }
 
             override fun onDelete(barang: Barang) {
-                CoroutineScope(Dispatchers.IO).launch {
-                    db.barangDao().deleteBarang(barang)
-                    loadBarang()
-                }
+                deleteDialog(barang)
             }
 
         })
@@ -79,5 +78,24 @@ class BarangActivity : AppCompatActivity() {
             .putExtra("intent_id", barangId)
             .putExtra("intent_type", intentType)
         )
+    }
+
+    private fun deleteDialog(barang: Barang){
+        val alertDialog = AlertDialog.Builder(this)
+        alertDialog.apply {
+            setTitle("Konfirmasi")
+            setMessage("Yakin hapus ${barang.nama} ?")
+            setNegativeButton("Batal") { dialog, which ->
+                dialog.dismiss()
+            }
+            setPositiveButton("Hapus") { dialog, which ->
+                dialog.dismiss()
+                CoroutineScope(Dispatchers.IO).launch {
+                    db.barangDao().deleteBarang(barang)
+                    loadBarang()
+                }
+            }
+        }
+        alertDialog.show()
     }
 }

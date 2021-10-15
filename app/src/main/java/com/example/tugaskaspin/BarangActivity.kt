@@ -9,6 +9,7 @@ import com.example.tugaskaspin.room.Barang
 import com.example.tugaskaspin.room.BarangDB
 import com.example.tugaskaspin.room.Constant
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.android.synthetic.main.activity_add_barang.*
 import kotlinx.android.synthetic.main.activity_barang.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -33,6 +34,10 @@ class BarangActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
+        loadBarang()
+    }
+
+    fun loadBarang(){
         CoroutineScope(Dispatchers.IO).launch {
             val barangs = db.barangDao().getBarangs()
             withContext(Dispatchers.Main){
@@ -52,6 +57,13 @@ class BarangActivity : AppCompatActivity() {
             override fun onUpdate(barang: Barang) {
                 intentEdit(barang.id, Constant.TYPE_UPDATE)
 //                Toast.makeText(applicationContext, barang.id.toString(), Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onDelete(barang: Barang) {
+                CoroutineScope(Dispatchers.IO).launch {
+                    db.barangDao().deleteBarang(barang)
+                    loadBarang()
+                }
             }
 
         })

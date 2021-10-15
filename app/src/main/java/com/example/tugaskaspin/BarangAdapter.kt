@@ -25,7 +25,7 @@ class BarangAdapter (private val barangs: ArrayList<Barang>, private val  listen
             listener.onUpdate(barang)
         }
         holder.itemView.icon_delete.setOnClickListener {
-//            listener.onUpdate(barang)
+            listener.onDelete(barang)
         }
     }
 
@@ -43,6 +43,7 @@ class BarangAdapter (private val barangs: ArrayList<Barang>, private val  listen
 
     interface OnAdapterListener{
         fun onUpdate(barang: Barang)
+        fun onDelete(barang: Barang)
     }
 
 }

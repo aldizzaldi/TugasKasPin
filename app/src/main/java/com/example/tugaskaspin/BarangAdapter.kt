@@ -33,6 +33,9 @@ class BarangAdapter (private val barangs: ArrayList<Barang>, private val  listen
             holder.itemView.icon_edit.visibility = View.GONE
             holder.itemView.text_stok_barang.visibility = View.GONE
             holder.itemView.btn_tambah_keranjang.visibility = View.VISIBLE
+            holder.itemView.btn_tambah_keranjang.setOnClickListener {
+                listener.onKurangiStok(barang)
+            }
         }
     }
 
@@ -51,6 +54,7 @@ class BarangAdapter (private val barangs: ArrayList<Barang>, private val  listen
     interface OnAdapterListener{
         fun onUpdate(barang: Barang)
         fun onDelete(barang: Barang)
+        fun onKurangiStok(barang: Barang)
     }
 
 }

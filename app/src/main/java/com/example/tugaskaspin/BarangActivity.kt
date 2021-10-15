@@ -72,6 +72,10 @@ class BarangActivity : AppCompatActivity() {
                 deleteDialog(barang)
             }
 
+            override fun onKurangiStok(barang: Barang) {
+                TODO("Not yet implemented")
+            }
+
         }, Constant.BARANG)
         rv_barang.apply {
             layoutManager = LinearLayoutManager(applicationContext)

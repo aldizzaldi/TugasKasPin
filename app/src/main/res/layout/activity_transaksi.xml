@@ -19,11 +19,11 @@
         android:id="@+id/btn_chekout"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
         android:layout_marginEnd="52dp"
-        android:layout_marginBottom="32dp"
         android:background="@drawable/btn_background"
         android:text="Checkout"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rv_barang_transaksi" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

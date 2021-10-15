@@ -20,11 +20,11 @@ interface BarangDao {
     @Query("SELECT * FROM barang WHERE id=:barang_id")
     suspend fun getBarang(barang_id: Int): List<Barang>
 
-    @Query("UPDATE barang SET jumlah = jumlah - 1 WHERE id=:barang_id")
-    suspend fun kurangiStok(barang_id: Int)
-
-    @Query("UPDATE barang SET jumlah = jumlah + 1 WHERE id=:barang_id")
-    suspend fun tambahiStok(barang_id: Int)
+//    @Query("UPDATE barang SET jumlah=:jumlah_kurang  WHERE id=:barang_id")
+//    suspend fun kurangiStok(barang_id: Int, jumlah_kurang: Int)
+//
+//    @Query("UPDATE barang SET jumlah = jumlah + 1 WHERE id=:barang_id")
+//    suspend fun tambahiStok(barang_id: Int)
 
 
 }

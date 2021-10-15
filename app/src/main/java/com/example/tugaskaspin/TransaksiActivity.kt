@@ -3,6 +3,7 @@ package com.example.tugaskaspin
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tugaskaspin.room.Barang
 import com.example.tugaskaspin.room.BarangDB
@@ -21,6 +22,10 @@ class TransaksiActivity : AppCompatActivity() {
     val db by lazy { BarangDB(this) }
     private var barangId: Int = 0
     lateinit var barangAdapter : BarangAdapter
+    var stok : Int = 0
+    var namaBarang : String = ""
+    var kodebarang : String = ""
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,21 +41,29 @@ class TransaksiActivity : AppCompatActivity() {
     }
 
     fun kurangiStok(){
-        barangId = intent.getIntExtra("intent_id", 0)
         CoroutineScope(Dispatchers.IO).launch {
-           db.barangDao().kurangiStok(barangId)
+            db.barangDao().updateBarang(
+                Barang(barangId, kodebarang, namaBarang, stok - 1)
+
+            )
         }
     }
 
     private fun setupRecyclerView(){
         barangAdapter = BarangAdapter(arrayListOf(), object : BarangAdapter.OnAdapterListener{
             override fun onUpdate(barang: Barang) {
-//                intentEdit(barang.id, Constant.TYPE_UPDATE)
-//                Toast.makeText(applicationContext, barang.id.toString(), Toast.LENGTH_SHORT).show()
             }
 
             override fun onDelete(barang: Barang) {
-//                deleteDialog(barang)
+            }
+
+            override fun onKurangiStok(barang: Barang) {
+                barangId = barang.id
+                namaBarang = barang.nama
+                kodebarang = barang.kode
+                stok = barang.jumlah
+                kurangiStok()
+                Toast.makeText(applicationContext, "$namaBarang Berhasil dimasukan kedalam keranjang", Toast.LENGTH_SHORT).show()
             }
 
         }, Constant.TRANSAKSI)

@@ -30,6 +30,7 @@ class BarangActivity : AppCompatActivity() {
 
         fab = findViewById(R.id.addBarangFAB)
 
+        setupView()
         setupListener()
         setupRecyclerView()
     }
@@ -37,6 +38,12 @@ class BarangActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         loadBarang()
+    }
+
+    fun setupView(){
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar!!.setTitle("Barang")
+
     }
 
     fun loadBarang(){
@@ -65,7 +72,7 @@ class BarangActivity : AppCompatActivity() {
                 deleteDialog(barang)
             }
 
-        })
+        }, Constant.BARANG)
         rv_barang.apply {
             layoutManager = LinearLayoutManager(applicationContext)
             adapter = barangAdapter
@@ -97,5 +104,10 @@ class BarangActivity : AppCompatActivity() {
             }
         }
         alertDialog.show()
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return super.onSupportNavigateUp()
     }
 }

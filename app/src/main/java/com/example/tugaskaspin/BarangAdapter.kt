@@ -5,9 +5,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tugaskaspin.room.Barang
+import com.example.tugaskaspin.room.Constant
 import kotlinx.android.synthetic.main.adapter_main.view.*
 
-class BarangAdapter (private val barangs: ArrayList<Barang>, private val  listener: OnAdapterListener)
+class BarangAdapter (private val barangs: ArrayList<Barang>, private val  listener: OnAdapterListener, private val identity: Int)
     : RecyclerView.Adapter<BarangAdapter.BarangViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BarangViewHolder {
@@ -26,6 +27,12 @@ class BarangAdapter (private val barangs: ArrayList<Barang>, private val  listen
         }
         holder.itemView.icon_delete.setOnClickListener {
             listener.onDelete(barang)
+        }
+        if (identity == Constant.TRANSAKSI){
+            holder.itemView.icon_delete.visibility = View.GONE
+            holder.itemView.icon_edit.visibility = View.GONE
+            holder.itemView.text_stok_barang.visibility = View.GONE
+            holder.itemView.btn_tambah_keranjang.visibility = View.VISIBLE
         }
     }
 

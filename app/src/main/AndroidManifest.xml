@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TugasKasPin">
-        <activity android:name=".TransaksiActivity"/>
+        <activity android:name=".CheckoutActivity"></activity>
+        <activity android:name=".TransaksiActivity" />
         <activity android:name=".BarangActivity" />
         <activity android:name=".AddBarangActivity" />
         <activity android:name=".MainActivity">

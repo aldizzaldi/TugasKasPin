@@ -1,9 +1,11 @@
 package com.example.tugaskaspin
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tugaskaspin.room.Barang
 import com.example.tugaskaspin.room.BarangDB
@@ -32,6 +34,7 @@ class TransaksiActivity : AppCompatActivity() {
         setContentView(R.layout.activity_transaksi)
         setupRecyclerView()
         setupView()
+        chekOut()
     }
 
     fun setupView(){
@@ -44,7 +47,6 @@ class TransaksiActivity : AppCompatActivity() {
         CoroutineScope(Dispatchers.IO).launch {
             db.barangDao().updateBarang(
                 Barang(barangId, kodebarang, namaBarang, stok - 1)
-
             )
         }
     }
@@ -90,5 +92,11 @@ class TransaksiActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return super.onSupportNavigateUp()
+    }
+
+    fun chekOut(){
+        btn_chekout.setOnClickListener {
+            startActivity(Intent(applicationContext, CheckoutActivity::class.java))
+        }
     }
 }

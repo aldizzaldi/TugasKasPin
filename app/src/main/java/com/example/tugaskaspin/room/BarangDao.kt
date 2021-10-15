@@ -15,5 +15,8 @@ interface BarangDao {
     suspend fun deleteBarang(barang: Barang)
 
     @Query("SELECT * FROM barang")
-    suspend fun getDatas(): List<Barang>
+    suspend fun getBarangs(): List<Barang>
+
+    @Query("SELECT * FROM barang WHERE id=:barang_id")
+    suspend fun getBarang(barang_id: Int): List<Barang>
 }

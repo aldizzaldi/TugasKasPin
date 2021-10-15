@@ -19,6 +19,8 @@ class AddBarangActivity : AppCompatActivity() {
         setContentView(R.layout.activity_add_barang)
 
         btnAddBarang = findViewById(R.id.btn_tambah_barang)
+
+        addBarang()
     }
 
     fun addBarang(){

@@ -4,6 +4,10 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import com.example.tugaskaspin.room.BarangDB
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,6 +28,5 @@ class MainActivity : AppCompatActivity() {
         btnTransaksi.setOnClickListener {
             startActivity(Intent(this,TransaksiActivity::class.java))
         }
-
     }
 }
